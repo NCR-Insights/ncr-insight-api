@@ -1,8 +1,11 @@
 import express from "express";
+import { connectToDB } from "./db";
 
-export const startServer = () => {
+export const startServer = async () => {
 	const app = express();
 	const PORT = process.env["PORT"];
+
+	await connectToDB();
 
 	app.get("/", (req, res) => {
 		return res.status(200).json({
