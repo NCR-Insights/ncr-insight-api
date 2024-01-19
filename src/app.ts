@@ -1,11 +1,18 @@
 import express from "express";
-import { connectToDB } from "./db";
+import { connectToDB } from "@/db";
+import { logger } from "@/utils/logger";
+import { morganConfig } from "@/middlewares/morgan";
+import cookieParser from "cookie-parser";
 
 export const startServer = async () => {
 	const app = express();
 	const PORT = process.env["PORT"];
 
 	await connectToDB();
+
+	app.use(express.json());
+	app.use(cookieParser());
+	app.use(morganConfig);
 
 	app.get("/", (req, res) => {
 		return res.status(200).json({
@@ -15,5 +22,5 @@ export const startServer = async () => {
 		});
 	});
 
-	app.listen(PORT, () => console.log(`App is running at ${PORT}`));
+	app.listen(PORT, () => logger.info(`App is running at ${PORT}`));
 };

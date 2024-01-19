@@ -1,3 +1,4 @@
+import { logger } from "@/utils/logger";
 import { connect as connectMongoDB } from "mongoose";
 
 export const connectToDB = async () => {
@@ -9,12 +10,11 @@ export const connectToDB = async () => {
 			`${CONNECTION_URL}/${DB_NAME}`,
 		);
 
-		console.log(
-			"\nDB Connected Successfully:",
-			mongoDBConnection.connection.host,
+		logger.info(
+			`DB Connected Successfully: ${mongoDBConnection.connection.host}`,
 		);
 	} catch (error) {
-		console.log("MONGO DB CONNECTION FAILED:", error);
+		logger.error(`MONGO DB CONNECTION FAILED: ${error}`);
 		process.exit(1);
 	}
 };
