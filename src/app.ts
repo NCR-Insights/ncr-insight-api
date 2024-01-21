@@ -3,6 +3,7 @@ import { connectToDB } from "@/db";
 import { logger } from "@/utils/logger";
 import { morganConfig } from "@/middlewares/morgan";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 
 export const startServer = async () => {
 	const app = express();
@@ -10,6 +11,7 @@ export const startServer = async () => {
 
 	await connectToDB();
 
+	app.use(cors());
 	app.use(express.json());
 	app.use(cookieParser());
 	app.use(morganConfig);
