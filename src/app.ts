@@ -9,13 +9,15 @@ import { getOrigins } from "@/utils/get-origins";
 export const startServer = async () => {
 	const app = express();
 	const PORT = process.env["PORT"];
+	const ORIGINS_STRING =
+		process.env["REQUEST_ORIGINS"] ?? "http://localhost:8000";
 
 	await connectToDB();
 
 	app.use(
 		cors({
 			credentials: true,
-			origin: getOrigins(),
+			origin: getOrigins(ORIGINS_STRING),
 		}),
 	);
 	app.use(express.json());

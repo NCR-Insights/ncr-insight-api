@@ -1,6 +1,3 @@
-export const getOrigins = () => {
-	const originsString =
-		process.env["REQUEST_ORIGINS"] ?? "http://localhost:8000";
-
+export const getOrigins = (originsString: string) => {
 	return originsString.split(",").map((origin) => origin.trim());
 };
