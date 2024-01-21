@@ -35,6 +35,14 @@ const userSchema = new Schema<UserModel>(
 			required: true,
 			unique: true,
 		},
+		isActive: {
+			type: Boolean,
+			default: true,
+		},
+		isBanned: {
+			type: Boolean,
+			default: false,
+		},
 	},
 	{
 		timestamps: true,

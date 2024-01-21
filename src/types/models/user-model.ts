@@ -6,4 +6,6 @@ export type UserModel = Document & {
 	avatar: string;
 	email: string;
 	providerId: string;
+	isActive: boolean;
+	isBanned: boolean;
 };
