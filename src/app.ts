@@ -5,6 +5,7 @@ import { morganConfig } from "@/middlewares/morgan";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import { getOrigins } from "@/utils/get-origins";
+import { apiHandler } from "@/utils/api-handler";
 
 export const startServer = async () => {
 	const app = express();
@@ -24,13 +25,16 @@ export const startServer = async () => {
 	app.use(cookieParser());
 	app.use(morganConfig);
 
-	app.get("/", (req, res) => {
-		return res.status(200).json({
-			success: true,
-			code: 200,
-			message: "Hello from Daily NCR API!!",
-		});
-	});
+	app.get(
+		"/",
+		apiHandler((req, res) => {
+			return res.status(200).json({
+				success: true,
+				code: 200,
+				message: "Hello from Daily NCR API!!",
+			});
+		}),
+	);
 
 	app.listen(PORT, () => logger.info(`App is running at ${PORT}`));
 };
