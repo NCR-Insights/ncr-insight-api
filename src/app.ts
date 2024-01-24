@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import { getOrigins } from "@/utils/get-origins";
 import { apiHandler } from "@/utils/api-handler";
+import { authRouter } from "./routes";
 
 export const startServer = async () => {
 	const app = express();
@@ -35,6 +36,8 @@ export const startServer = async () => {
 			});
 		}),
 	);
+
+	app.use("/api/v1/auth", authRouter);
 
 	app.listen(PORT, () => logger.info(`App is running at ${PORT}`));
 };
