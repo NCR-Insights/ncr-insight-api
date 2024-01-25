@@ -56,7 +56,7 @@ export const adminLogin = apiHandler<
 		},
 	};
 
-	const adminAuthToken = jwt.sign(data, process.env["SECRET"] ?? "");
+	const adminAuthToken = jwt.sign(data, process.env["ADMIN_SECRET"] ?? "");
 
 	response.cookie(
 		process.env["ADMIN_AUTH_COOKIE_NAME"] ?? "admin-token",
