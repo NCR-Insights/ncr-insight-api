@@ -14,11 +14,11 @@ export const isAdmin = (req: Request, res: Response, next: NextFunction) => {
 	const adminCookie =
 		req.cookies[process.env["ADMIN_AUTH_COOKIE_NAME"] ?? "admin-token"];
 
-	if (!adminCookie) {
-		throw new APIError("Access Denied!!", 401);
-	}
-
 	try {
+		if (!adminCookie) {
+			throw new APIError("Access Denied!!", 401);
+		}
+
 		const jwtPayload = jwt.verify(
 			adminCookie,
 			process.env["ADMIN_SECRET"] ?? "",
@@ -51,6 +51,16 @@ export const isAdmin = (req: Request, res: Response, next: NextFunction) => {
 				success: false,
 				error: error.message,
 				code: error.code,
+			});
+		}
+
+		if (error instanceof jwt.JsonWebTokenError) {
+			logger.error(error.message);
+
+			return res.status(401).json({
+				success: false,
+				error: "Access Denied!!",
+				code: 401,
 			});
 		}
 
