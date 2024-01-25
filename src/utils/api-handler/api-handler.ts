@@ -1,6 +1,7 @@
 import { APIError } from "@/types/errors";
 import { Controller } from "@/types/express";
 import { logger } from "../logger";
+import { MongooseError } from "mongoose";
 
 export const apiHandler =
 	<
@@ -11,10 +12,20 @@ export const apiHandler =
 	>(
 		controller: Controller<Params, ResponseData, RequestBody, Query>,
 	): Controller<Params, ResponseData, RequestBody, Query> =>
-	(request, response, next) => {
+	async (request, response, next) => {
 		try {
-			return controller(request, response, next);
+			return await Promise.resolve(controller(request, response, next));
 		} catch (error) {
+			if (error instanceof MongooseError) {
+				logger.error(error.message);
+
+				return response.status(400).json({
+					success: false,
+					error: error.message,
+					code: 400,
+				});
+			}
+
 			if (error instanceof APIError) {
 				logger.error(error.message);
 
@@ -27,6 +38,14 @@ export const apiHandler =
 
 			if (error instanceof Error) {
 				logger.error(error.message);
+
+				if (error.message.includes("E11000")) {
+					return response.status(400).json({
+						success: false,
+						error: "Duplicate record found!!",
+						code: 400,
+					});
+				}
 
 				return response.status(400).json({
 					success: false,
