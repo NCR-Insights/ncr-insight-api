@@ -24,6 +24,11 @@ const newsSchema = new Schema<NewsModel>(
 			required: false,
 			default: null,
 		},
+		isPublished: {
+			type: Boolean,
+			required: true,
+			default: true,
+		},
 	},
 	{
 		timestamps: true,

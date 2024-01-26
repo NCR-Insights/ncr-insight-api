@@ -15,6 +15,11 @@ const headlineSchema = new Schema<HeadlineModel>(
 			trim: true,
 			required: true,
 		},
+		isPublished: {
+			type: Boolean,
+			required: true,
+			default: true,
+		},
 	},
 	{
 		timestamps: true,
