@@ -48,26 +48,6 @@ export const createAdmin = apiHandler<
 	const salt = await genSalt(12);
 	const hashedPassword = await hash(password.trim(), salt);
 
-	// let createdAdmin: AdminModel;
-
-	// try {
-	// 	const createdAdmin = await Admin.create({
-	// 		name: name.trim(),
-	// 		password: hashedPassword,
-	// 		email: email.trim(),
-	// 	});
-	// } catch (error) {
-	// 	console.log("HERE");
-
-	// 	if (error instanceof MongooseError) {
-	// 		throw new APIError(error.message, 400);
-	// 	}
-
-	// 	if (error instanceof Error) {
-	// 		throw new APIError(error.message, 400);
-	// 	}
-	// }
-
 	const createdAdmin = await Admin.create({
 		name: name.trim(),
 		password: hashedPassword,
