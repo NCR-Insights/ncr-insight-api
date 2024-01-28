@@ -21,6 +21,7 @@ interface ResponseBody {
 export const getAllAdmins = apiHandler<
 	Record<string, never>,
 	ResponseBody,
+	undefined,
 	RequestQuery
 >(async (request, response) => {
 	const requestBodyValidationResult = RequestQuerySchema.safeParse(

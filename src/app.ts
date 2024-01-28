@@ -6,7 +6,8 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import { getOrigins } from "@/utils/get-origins";
 import { apiHandler } from "@/utils/api-handler";
-import { adminRouter, authRouter } from "./routes";
+import { adminRouter, assetRouter, authRouter } from "./routes";
+import fileUpload from "express-fileupload";
 
 export const startServer = async () => {
 	const app = express();
@@ -25,6 +26,11 @@ export const startServer = async () => {
 	app.use(express.json());
 	app.use(cookieParser());
 	app.use(morganConfig);
+	app.use(
+		fileUpload({
+			useTempFiles: true,
+		}),
+	);
 
 	app.get(
 		"/",
@@ -39,6 +45,7 @@ export const startServer = async () => {
 
 	app.use("/api/v1/auth", authRouter);
 	app.use("/api/v1/admin", adminRouter);
+	app.use("/api/v1/asset", assetRouter);
 
 	app.listen(PORT, () => logger.info(`App is running at ${PORT}`));
 };
