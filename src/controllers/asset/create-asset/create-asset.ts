@@ -41,8 +41,6 @@ export const createAsset = apiHandler<
 	}
 
 	if (!requestBodyValidationResult.success) {
-		await unlink(assetData.tempFilePath);
-
 		throw new APIError(
 			requestBodyValidationResult.error.errors[0]?.message ??
 				"Something went wrong!!",
