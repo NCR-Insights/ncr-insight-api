@@ -63,6 +63,14 @@ export const getAllAssets = apiHandler<
 			$match: matchObject,
 		},
 		{
+			$addFields: {
+				id: "$_id",
+			},
+		},
+		{
+			$unset: ["_id"],
+		},
+		{
 			$sort: sortObject,
 		},
 		{
