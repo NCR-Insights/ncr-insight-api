@@ -11,8 +11,8 @@ const headlineSchema = new Schema<HeadlineModel>(
 			required: true,
 		},
 		coverImage: {
-			type: String,
-			trim: true,
+			type: Schema.Types.ObjectId,
+			ref: "asset",
 			required: true,
 		},
 		isPublished: {
