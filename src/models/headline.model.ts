@@ -20,6 +20,12 @@ const headlineSchema = new Schema<HeadlineModel>(
 			required: true,
 			default: true,
 		},
+		category: {
+			type: Schema.Types.ObjectId,
+			ref: "category",
+			required: false,
+			default: null,
+		},
 	},
 	{
 		timestamps: true,

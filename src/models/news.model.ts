@@ -29,6 +29,11 @@ const newsSchema = new Schema<NewsModel>(
 			required: true,
 			default: true,
 		},
+		headline: {
+			type: Schema.Types.ObjectId,
+			ref: "headline",
+			required: true,
+		},
 	},
 	{
 		timestamps: true,

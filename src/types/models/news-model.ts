@@ -5,4 +5,5 @@ export type NewsModel = Document & {
 	heading: string | null;
 	author: Types.ObjectId | null;
 	isPublished: boolean;
+	headline: Types.ObjectId;
 };
