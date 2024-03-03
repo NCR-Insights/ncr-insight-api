@@ -67,7 +67,7 @@ export const adminLogin = apiHandler<
 			secure: process.env["NODE_ENV"] === "production",
 			domain:
 				process.env["NODE_ENV"] === "production"
-					? request.get("host")
+					? process.env["PRODUCTION_ADMIN_DOMAIN"]
 					: "localhost",
 		},
 	);
