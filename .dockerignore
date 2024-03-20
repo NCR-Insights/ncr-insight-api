@@ -1,0 +1,11 @@
+.DS_Store
+
+build
+dist
+
+.env
+.env.production
+
+Dockerfile
+.dockerignore
+docker-compose.yml
