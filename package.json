@@ -1,5 +1,5 @@
 {
-	"name": "the-weekly-ncr-backend",
+	"name": "the-ncr-insight-api",
 	"version": "0.0.1",
 	"description": "This is the backend for The Weekly NCR",
 	"main": "build/index.js",

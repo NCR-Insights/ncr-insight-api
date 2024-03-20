@@ -21,6 +21,11 @@ const adminSchema = new Schema<AdminModel>(
 			required: true,
 			trim: true,
 		},
+		isActive: {
+			type: Boolean,
+			required: false,
+			default: false,
+		},
 	},
 	{
 		timestamps: true,

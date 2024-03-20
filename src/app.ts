@@ -8,6 +8,7 @@ import { getOrigins } from "@/utils/get-origins";
 import { apiHandler } from "@/utils/api-handler";
 import { adminRouter, assetRouter, authRouter, categoryRouter } from "./routes";
 import fileUpload from "express-fileupload";
+import { seedRouter } from "./routes/seed.routes";
 
 export const startServer = async () => {
 	const app = express();
@@ -43,6 +44,7 @@ export const startServer = async () => {
 		}),
 	);
 
+	app.use("/api/v1/seed", seedRouter);
 	app.use("/api/v1/auth", authRouter);
 	app.use("/api/v1/admin", adminRouter);
 	app.use("/api/v1/asset", assetRouter);
