@@ -26,7 +26,7 @@ WORKDIR /usr/apps/ncr-insight-api
 COPY package.json .
 COPY yarn.lock .
 
-RUN yarn install --production
+RUN yarn install --frozen-lockfile --production
 RUN yarn add -D @swc/cli @swc/core
 
 COPY . .
